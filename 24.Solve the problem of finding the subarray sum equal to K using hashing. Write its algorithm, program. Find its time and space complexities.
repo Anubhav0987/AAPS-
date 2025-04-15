@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class SubarraySumEqualsK {
+    public static int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> prefixSumCount = new HashMap<>();
+        prefixSumCount.put(0, 1); // to handle subarrays starting at index 0
+
+        int count = 0;
+        int prefixSum = 0;
+
+        for (int num : nums) {
+            prefixSum += num;
+            if (prefixSumCount.containsKey(prefixSum - k)) {
+                count += prefixSumCount.get(prefixSum - k);
+            }
+            prefixSumCount.put(prefixSum, prefixSumCount.getOrDefault(prefixSum, 0) + 1);
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3};
+        int k = 3;
+        System.out.println("Number of subarrays with sum = " + k + ": " + subarraySum(nums, k));
+    }
+}
+Time Complexity: O(n)
+Space Complexity: O(n)
