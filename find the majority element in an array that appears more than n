@@ -1,3 +1,4 @@
+# this is a code in python
 def majorityElement(nums):
     count = 0
     candidate = None
